@@ -10,13 +10,28 @@ class Auto {
     }
 }
 
-// Creamos los objetos
+//Declaramos el array
+
+const arrayAutos = []
+
+// Creamos los objetos y los agregamos al array
 const city = new Auto(1,'City',363900,16)
+arrayAutos.push(city)
 const civic = new Auto(2,'Civic',545900,14)
+arrayAutos.push(civic)
 const accord = new Auto(3,'Accord',779900,11)
+arrayAutos.push(accord)
 const crv = new Auto(4,'CRV',714900,12)
+arrayAutos.push(crv)
 const pilot = new Auto(5,'Pilot',1029900,9)
+arrayAutos.push(pilot)
 const aveo = new Auto(6,'Aveo',255200,16)
+arrayAutos.push(aveo)
+
+//Mostramos el array de objetos
+console.log(arrayAutos)
+console.log('==================')
+
 
 let autoSeleccionado = parseInt(prompt('Selecciona el número del automóvil deseado: \n 1) City $363,900 \n 2) Civic $545,900 \n 3) Accord $7799,900 \n 4) CRV $714,900 \n 5) Pilot $1029,900 \n 6) Aveo $255,200'));
 
@@ -29,28 +44,43 @@ let infodelAuto
 while (seleccionoAuto === false) {
     if (autoSeleccionado === 1) {
         seleccionoAuto = true
-        infodelAuto = city
+        infodelAuto = 'City'
+        indice = 0
     } else if (autoSeleccionado === 2){
         seleccionoAuto = true
-        infodelAuto = civic
+        infodelAuto = 'Civic'
+        indice = 1
     } else if (autoSeleccionado === 3){
         seleccionoAuto = true
-        infodelAuto = accord
+        infodelAuto = 'Accord'
+        indice = 2
     } else if (autoSeleccionado === 4){
         seleccionoAuto = true
-        infodelAuto = crv
+        infodelAuto = 'CRV'
+        indice = 3
     } else if (autoSeleccionado === 5){
         seleccionoAuto = true
-        infodelAuto = pilot
+        infodelAuto = 'Pilot'
+        indice = 4
     } else if (autoSeleccionado === 6){
         seleccionoAuto = true
-        infodelAuto = aveo
+        infodelAuto = 'Aveo'
+        indice = 5
     } else {
         autoSeleccionado = parseInt(prompt('Selecciona solo el NÚMERO del automóvil deseado: \n 1) City $363,900 \n 2) Civic $545,900 \n 3) Accord $7799,900 \n 4) CRV $714,900 \n 5) Pilot $1029,900 \n 6) Aveo $255,200'));
 
     }
     
 }
+
+//Realizamos el filtro en el array
+const automovil = arrayAutos.filter(auto=>auto.modelo===infodelAuto)
+const modeloAuto = arrayAutos[indice].modelo
+const costoAuto = arrayAutos[indice].costo
+const tasaAuto = arrayAutos[indice].tasa
+
+// debugger; 
+
 
 //Preguntamos el enganche en % 
 let enganchePorcentaje = parseInt(prompt('Ingresa un número del 1 al 99 representando el porcentaje del enganche \n Ejemplo: 12, 24, 36, 48, 72'))
@@ -74,14 +104,14 @@ function enganchefuncion(ePorcentaje,iAuto) {
 return calculoEnganche
 }
 
-const enganche = enganchefuncion(enganchePorcentaje,infodelAuto.costo)
+const enganche = enganchefuncion(enganchePorcentaje,costoAuto)
 console.log('Enganche: '+enganche)
 
 //Calculamos el crédito al costo del auto menos el enganche
-const credito = infodelAuto.costo-enganche
+const credito = costoAuto-enganche
 
 //Calculamos tasa de interes mensual
-const tasaInteresMensual = (infodelAuto.tasa/12)/100
+const tasaInteresMensual = (tasaAuto/12)/100
 
 //Calculamos el interes mensual
 const interes = credito*tasaInteresMensual
@@ -114,6 +144,6 @@ const total = mensualidadTotal(amortizacion,interes,impuesto)
  console.log('Mensualidad Total: '+total)
 
 // Mostramos al cliente la mensualidad total a pagar
-alert(`El automóvil seleccionado es: ${infodelAuto.modelo} \n Tú mensualidad seria: ${total.toFixed(2)} MXN por ${mensualidades} mensualidades`)
+alert(`El automóvil seleccionado es: ${modeloAuto} \n Tú mensualidad seria: ${total.toFixed(2)} MXN por ${mensualidades} mensualidades`)
 
 
